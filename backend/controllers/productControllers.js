@@ -53,10 +53,23 @@ const updateProduct = async (req, res) => {
     res.status(400).send({ msg: error.message });
   }
 };
+const filterProductByprice=async(req,res)=>{
+  const {price}=req.query
+res.send(req.query)
+  try {
+   const Products= await prodcutModel.find({ })
+   flitredProducts=Products.filter((el)=>el.price>=req.query.price)
+   res.send({Products,flitredProducts})
+  } catch (error) {
+    console.log(error)
+    res.status(400).send({ msg: error.message });
+  }
+
+}
 module.exports = {
   addProduct,
   getProducts,
   getOneProduct,
   deleteProduct,
-  updateProduct,
+  updateProduct,filterProductByprice
 };

@@ -1,6 +1,6 @@
 const express=require("express")
 const upload=require("../utils/multer")
-const { addProduct, getProducts, getOneProduct, filterProduct, deleteProduct, updateProduct } = require("../controllers/productControllers")
+const { addProduct, getProducts, getOneProduct, filterProduct, deleteProduct, updateProduct, filterProductByprice } = require("../controllers/productControllers")
 const router=express.Router()
 /**
  * @params POST /product/addproduct
@@ -20,6 +20,7 @@ router.get("/",getProducts)
  * @acces public
  */
 router.get("/:id",getOneProduct)
+
 /**
  * @params GET /product/:id
  * @description delete product 
@@ -33,4 +34,10 @@ router.delete("/:id",deleteProduct)
  * @acces public
  */
 router.put("/:id",upload("products").single("file"),updateProduct)
+/**
+ * @params GET /product/filter
+ * @description filter products by price
+ * @acces public
+ */
+ router.get("/filter/prod",filterProductByprice)
 module.exports=router
